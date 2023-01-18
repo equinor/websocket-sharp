@@ -247,6 +247,19 @@ namespace WebSocketSharp.Server
     #region Public Properties
 
     /// <summary>
+    /// Gets the information in a handshake request to the WebSocket service.
+    /// </summary>
+    /// <value>
+    /// A <see cref="WebSocketContext"/> instance that provides the access to the handshake request,
+    /// or <see langword="null"/> if the WebSocket connection isn't established.
+    /// </value>
+    public WebSocketContext Context {
+      get {
+        return _context;
+      }
+    }
+
+    /// <summary>
     /// Gets or sets the delegate used to validate the HTTP cookies.
     /// </summary>
     /// <value>
@@ -557,6 +570,19 @@ namespace WebSocketSharp.Server
     #endregion
 
     #region Protected Methods
+         /// <summary>
+    /// Gets the logging functions.
+    /// </summary>
+    /// <value>
+    /// A <see cref="Logger"/> that provides the logging functions,
+    /// or <see langword="null"/> if the WebSocket connection isn't established.
+    /// </value>
+    protected Logger Log {
+      get {
+        return _websocket != null ? _websocket.Log : null;
+      }
+    }
+
 
     /// <summary>
     /// Closes the WebSocket connection for a session.
