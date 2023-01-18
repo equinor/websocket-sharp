@@ -403,6 +403,11 @@ namespace WebSocketSharp
         return _credentials;
       }
     }
+    
+    /// <summary>
+    /// Gets or sets the custom headers
+    /// </summary>
+    public IEnumerable<KeyValuePair<string, string>> CustomHeaders { get; set; }
 
     /// <summary>
     /// Gets or sets a value indicating whether the message event is
@@ -426,6 +431,8 @@ namespace WebSocketSharp
         _emitOnPing = value;
       }
     }
+    
+
 
     /// <summary>
     /// Gets or sets a value indicating whether the URL redirection for
@@ -1419,6 +1426,11 @@ namespace WebSocketSharp
 
       if (_cookies.Count > 0)
         ret.SetCookies (_cookies);
+
+      if (CustomHeaders != null)
+        foreach (var header in CustomHeaders)
+          if (!headers.Contains(header.Key))
+            ret.Headers[header.Key] = header.Value;
 
       return ret;
     }
